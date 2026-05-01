@@ -1,0 +1,10 @@
+streamlit
+google-api-python-client
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+scikit-learn
+plotly
+python-dotenv
