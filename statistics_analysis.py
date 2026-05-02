@@ -217,15 +217,3 @@ def categorize_videos(df):
     
     return df, summary
 
-if __name__ == "__main__":
-    from youtube_api import get_channel_id, get_channel_stats, get_all_videos
-
-    channel_id = get_channel_id("Ducky Bhai")
-    stats = get_channel_stats(channel_id)
-    videos = get_all_videos(stats["playlist_id"])
-
-    df = prepare_dataframe(videos)
-    print("Total videos:", len(df))
-    print("Columns:", df.columns.tolist())
-    pd.set_option('display.max_columns', None)
-    print(df.head(5))
