@@ -119,3 +119,113 @@ def fit_probability_distribution(df):
         }
     
     return results
+
+def build_regression_model(df):
+    #Use days as X axis and views as Y axis
+    X=df["days_since_start"].values.reshape(-1,1)
+    Y=df["cumulative_views"].values
+
+    #Split data into 80% and 20%
+    split=int(len(df)*0.80)
+    X_train,X_test=X[:split],X[split:]
+    Y_train,Y_test=Y[:split],Y[split:]
+
+    #Fit Linear Regression model
+    model=LinearRegression()
+    model.fit(X_train,Y_train)
+
+    #Predict on test set
+    Y_pred=model.predict(X_test)
+
+    #Measure Accuracy
+    r2=r2_score(Y_test,Y_pred)
+    mae=mean_absolute_error(Y_test,Y_pred)
+
+    #Prediction for next 30 days
+    last_day=int(df["days_since_start"].max())
+    future_days=np.array(range(last_day,last_day+365)).reshape(-1,1)
+    future_predictions=model.predict(future_days)
+
+    return {
+        "model": model,
+        "r2_score": round(r2, 4),
+        "mae": round(mae, 2),
+        "slope": round(model.coef_[0], 2),
+        "intercept": round(model.intercept_, 2),
+        "X_test": X_test,
+        "Y_test": Y_test,
+        "Y_pred": Y_pred,
+        "future_days": future_days,
+        "future_predictions": future_predictions
+    }
+
+def detect_outliers(df):
+    outliers = {}
+    
+    for col in ["views", "likes", "comments"]:
+        data = df[col]
+        
+        # IQR method
+        Q1 = data.quantile(0.25)
+        Q3 = data.quantile(0.75)
+        IQR = Q3 - Q1
+        
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        
+        # Find outlier videos
+        outlier_videos = df[
+            (df[col] < lower_bound) | (df[col] > upper_bound)
+        ][["title", "published_at", col]].sort_values(col, ascending=False)
+        
+        outliers[col] = {
+            "lower_bound": round(lower_bound, 2),
+            "upper_bound": round(upper_bound, 2),
+            "outlier_count": len(outlier_videos),
+            "outlier_videos": outlier_videos
+        }
+    
+    return outliers
+
+def categorize_videos(df):
+    # Calculate thresholds
+    mean_views = df["views"].mean()
+    std_views = df["views"].std()
+    
+    # Categorize each video
+    def get_category(views):
+        if views > mean_views + 2 * std_views:
+            return "Viral"
+        elif views > mean_views + std_views:
+            return "Hit"
+        elif views > mean_views:
+            return "Above Average"
+        elif views > mean_views - std_views:
+            return "Average"
+        else:
+            return "Flop"
+    
+    df["category"] = df["views"].apply(get_category)
+    
+    # Summary
+    summary = df.groupby("category").agg(
+        video_count = ("video_id", "count"),
+        avg_views = ("views", "mean"),
+        avg_likes = ("likes", "mean"),
+        avg_comments = ("comments", "mean")
+    ).round(2)
+    
+    return df, summary
+
+if __name__ == "__main__":
+    from youtube_api import get_channel_id, get_channel_stats, get_all_videos
+
+    channel_id = get_channel_id("Ducky Bhai")
+    stats = get_channel_stats(channel_id)
+    videos = get_all_videos(stats["playlist_id"])
+
+    df = prepare_dataframe(videos)
+    print("Total videos:", len(df))
+    print("Columns:", df.columns.tolist())
+    pd.set_option('display.max_columns', None)
+    print(df.head(5))

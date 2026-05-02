@@ -110,7 +110,7 @@ def parse_duration(duration):
     minutes = int(minutes.group(1)) if minutes else 0
     seconds = int(seconds.group(1)) if seconds else 0
 
-    return hours, minutes, seconds
+    return hours+ minutes+ seconds
 
 # if __name__=="__main__":
 #     channel_name="Ducky Bhai"
