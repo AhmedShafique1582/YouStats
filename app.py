@@ -129,7 +129,7 @@ df = st.session_state.df
 cs = st.session_state.cs
 
 if page == "Channel Overview":
-    from views.p1_overview import render; render(df, cs)
+    from views.p1_overview import render; render(df, cs, rpm_val)
 elif page == "Descriptive Statistics":
     from views.p2_stats import render; render(df, cs)
 elif page == "Growth Analysis":

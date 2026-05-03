@@ -5,7 +5,7 @@ import numpy as np
 from statistics_analysis import get_channel_health_score, estimate_revenue
 from views.helpers import CT, ct, kpi, card_open, card_close, fmt
 
-def render(df, cs):
+def render(df, cs, rpm=4.0):
     st.markdown('<div style="padding:28px 32px 0;">', unsafe_allow_html=True)
     st.markdown(f"""
     <div style="display:flex;align-items:center;gap:20px;margin-bottom:28px;">
@@ -16,7 +16,7 @@ def render(df, cs):
       </div>
     </div>""", unsafe_allow_html=True)
 
-    rev = estimate_revenue(df)
+    rev = estimate_revenue(df, rpm)
     health = get_channel_health_score(df, cs)
 
     # KPI cards
