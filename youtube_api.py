@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+if not YOUTUBE_API_KEY:
+    import streamlit as st
+    YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 
 youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY)
 
