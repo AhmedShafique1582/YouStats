@@ -11,14 +11,12 @@ st.markdown("""
 .stApp{background:#0f0f0f;color:#e0e0e0;}
 [data-testid="stSidebar"]{background:#111!important;border-right:1px solid rgba(255,255,255,0.07)!important;width:280px!important;min-width:280px!important;max-width:280px!important;}
 [data-testid="stSidebar"]>div{background:transparent!important;}
-[data-testid="collapsedControl"]{display:none!important;visibility:hidden!important;}
-[data-testid="stSidebarCollapsedControl"]{display:none!important;visibility:hidden!important;}
-button[data-testid="collapsedControl"]{display:none!important;}
+[data-testid="collapsedControl"]{display:none!important;visibility:hidden!important;width:0!important;overflow:hidden!important;}
+[data-testid="stSidebarCollapsedControl"]{display:none!important;visibility:hidden!important;width:0!important;overflow:hidden!important;}
 button[aria-label="Close sidebar"]{display:none!important;}
 button[aria-label="Collapse sidebar"]{display:none!important;}
-button[aria-expanded="true"][data-testid]{display:none!important;}
-section[data-testid="stSidebar"] button{display:none!important;}
-[data-testid="stSidebar"] [data-testid="stBaseButton-header"]{display:none!important;}
+[data-testid="stBaseButton-header"]{display:none!important;}
+[data-testid="stSidebar"] header{display:none!important;}
 #MainMenu,footer,header{visibility:hidden;}
 [data-testid="stDecoration"]{display:none;}
 [data-testid="stSidebar"] .stRadio>div{gap:0;}
@@ -61,11 +59,11 @@ div[data-baseweb="select"]>div{background:#1a1a1a!important;border-color:rgba(25
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style="padding:24px 20px 18px;border-bottom:1px solid #1c1c1c;">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1c1c1c;">
       <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;">You<span style="color:#ff0000;">Stat</span></div>
-      <div style="font-size:9px;color:#333;text-transform:uppercase;letter-spacing:2.5px;margin-top:3px;">Analytics Studio</div>
+      <div style="font-size:9px;color:#333;text-transform:uppercase;letter-spacing:2.5px;margin-top:2px;">Analytics Studio</div>
     </div>
-    <div style="padding:16px 20px 6px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Pages</div>
+    <div style="padding:10px 20px 4px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Pages</div>
     """, unsafe_allow_html=True)
 
     page = st.radio("", [
@@ -78,14 +76,14 @@ with st.sidebar:
         "Revenue Estimation",
     ], label_visibility="collapsed")
 
-    st.markdown("""<div style="padding:16px 20px 6px;border-top:1px solid #1c1c1c;margin-top:10px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Search</div>""", unsafe_allow_html=True)
+    st.markdown("""<div style="padding:10px 20px 4px;border-top:1px solid #1c1c1c;margin-top:4px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Search</div>""", unsafe_allow_html=True)
 
     channel_query = st.text_input("", placeholder="Channel name or ID", label_visibility="collapsed")
-    st.markdown('<div style="padding:8px 20px 4px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">RPM ($/1K views)</div>', unsafe_allow_html=True)
+    st.markdown('<div style="padding:4px 20px 2px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">RPM ($/1K views)</div>', unsafe_allow_html=True)
     rpm_val = st.number_input("", min_value=0.1, max_value=50.0, value=4.0, step=0.5,
                               format="%.1f", label_visibility="collapsed",
                               help="Revenue Per Mille — average earnings per 1,000 views")
-    st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
     analyze = st.button("Analyze Channel  ›")
 
     st.markdown("""<div style="padding:14px 20px;margin-top:6px;font-size:10px;color:#252525;">YouStat © 2026</div>""", unsafe_allow_html=True)
