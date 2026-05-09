@@ -61,9 +61,9 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:16px 20px 12px;border-bottom:1px solid #1c1c1c;">
       <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;">You<span style="color:#ff0000;">Stat</span></div>
-      <div style="font-size:9px;color:#333;text-transform:uppercase;letter-spacing:2.5px;margin-top:2px;">Analytics Studio</div>
+      <div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:2.5px;margin-top:2px;">Analytics Studio</div>
     </div>
-    <div style="padding:10px 20px 4px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Pages</div>
+    <div style="padding:10px 20px 4px;font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:2px;">Pages</div>
     """, unsafe_allow_html=True)
 
     page = st.radio("", [
@@ -76,10 +76,10 @@ with st.sidebar:
         "Revenue Estimation",
     ], label_visibility="collapsed")
 
-    st.markdown("""<div style="padding:10px 20px 4px;border-top:1px solid #1c1c1c;margin-top:4px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">Search</div>""", unsafe_allow_html=True)
+    st.markdown("""<div style="padding:10px 20px 4px;border-top:1px solid #1c1c1c;margin-top:4px;font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:2px;">Search</div>""", unsafe_allow_html=True)
 
     channel_query = st.text_input("", placeholder="Channel name or ID", label_visibility="collapsed")
-    st.markdown('<div style="padding:4px 20px 2px;font-size:9px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:2px;">RPM ($/1K views)</div>', unsafe_allow_html=True)
+    st.markdown('<div style="padding:4px 20px 2px;font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:2px;">RPM ($/1K views)</div>', unsafe_allow_html=True)
     rpm_val = st.number_input("", min_value=0.1, max_value=50.0, value=4.0, step=0.5,
                               format="%.1f", label_visibility="collapsed",
                               help="Revenue Per Mille — average earnings per 1,000 views")
@@ -127,7 +127,7 @@ if not st.session_state.loaded:
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
                 min-height:100vh;margin-top:-80px;text-align:center;">
       <div style="font-size:72px;font-weight:900;letter-spacing:-3px;color:#fff;margin-bottom:10px;">You<span style="color:#ff0000;">Stat</span></div>
-      <div style="font-size:16px;color:#333;">Advanced YouTube analytics — powered by real data.</div>
+      <div style="font-size:16px;color:#888;">Advanced YouTube analytics powered by real data.</div>
     </div>""", unsafe_allow_html=True)
     st.stop()
 
