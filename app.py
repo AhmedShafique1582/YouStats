@@ -9,8 +9,13 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 *{font-family:'Inter',sans-serif;box-sizing:border-box;}
 .stApp{background:#0f0f0f;color:#e0e0e0;}
-[data-testid="stSidebar"]{background:#111!important;border-right:1px solid rgba(255,255,255,0.07)!important;}
+[data-testid="stSidebar"]{background:#111!important;border-right:1px solid rgba(255,255,255,0.07)!important;width:240px!important;min-width:240px!important;max-width:240px!important;}
 [data-testid="stSidebar"]>div{background:transparent!important;}
+[data-testid="collapsedControl"]{display:none!important;}
+button[kind="header"]{display:none!important;}
+[data-testid="stSidebarCollapsedControl"]{display:none!important;}
+section[data-testid="stSidebar"] > div:first-child > div > button{display:none!important;}
+[data-testid="stSidebar"] [data-testid="stBaseButton-header"]{display:none!important;}
 #MainMenu,footer,header{visibility:hidden;}
 [data-testid="stDecoration"]{display:none;}
 [data-testid="stSidebar"] .stRadio>div{gap:0;}
