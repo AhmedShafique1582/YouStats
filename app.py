@@ -2,19 +2,22 @@ import streamlit as st
 from youtube_api import get_channel_id, get_channel_stats, get_all_videos
 from statistics_analysis import prepare_dataframe
 
-st.set_page_config(page_title="YouStat", page_icon="", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="YouStat", page_icon="", layout="wide", initial_sidebar_state="expanded", menu_items={})
 
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 *{font-family:'Inter',sans-serif;box-sizing:border-box;}
 .stApp{background:#0f0f0f;color:#e0e0e0;}
-[data-testid="stSidebar"]{background:#111!important;border-right:1px solid rgba(255,255,255,0.07)!important;width:240px!important;min-width:240px!important;max-width:240px!important;}
+[data-testid="stSidebar"]{background:#111!important;border-right:1px solid rgba(255,255,255,0.07)!important;width:280px!important;min-width:280px!important;max-width:280px!important;}
 [data-testid="stSidebar"]>div{background:transparent!important;}
-[data-testid="collapsedControl"]{display:none!important;}
-button[kind="header"]{display:none!important;}
-[data-testid="stSidebarCollapsedControl"]{display:none!important;}
-section[data-testid="stSidebar"] > div:first-child > div > button{display:none!important;}
+[data-testid="collapsedControl"]{display:none!important;visibility:hidden!important;}
+[data-testid="stSidebarCollapsedControl"]{display:none!important;visibility:hidden!important;}
+button[data-testid="collapsedControl"]{display:none!important;}
+button[aria-label="Close sidebar"]{display:none!important;}
+button[aria-label="Collapse sidebar"]{display:none!important;}
+button[aria-expanded="true"][data-testid]{display:none!important;}
+section[data-testid="stSidebar"] button{display:none!important;}
 [data-testid="stSidebar"] [data-testid="stBaseButton-header"]{display:none!important;}
 #MainMenu,footer,header{visibility:hidden;}
 [data-testid="stDecoration"]{display:none;}
