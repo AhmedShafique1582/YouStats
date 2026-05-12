@@ -9,8 +9,6 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Existing functions ────────────────────────────────────────────────────────
-
 def prepare_dataframe(videos):
     df = pd.DataFrame(videos)
     df["published_at"] = pd.to_datetime(df["published_at"])
@@ -136,8 +134,6 @@ def categorize_videos(df):
     ).round(2)
     return df, summary
 
-# ── New functions ─────────────────────────────────────────────────────────────
-
 def get_channel_health_score(df, channel_stats):
     score = 0
     avg_eng = df["engagement_rate"].mean()
@@ -172,6 +168,7 @@ def get_channel_health_score(df, channel_stats):
     status = "Excellent" if score>=85 else "Optimized" if score>=70 else "Good" if score>=55 else "Average" if score>=40 else "Needs Work"
     return {"score": score, "status": status,
             "factors": {"Engagement":eng_score,"Consistency":cons_score,"Growth":grow_score,"Volume":vid_score,"Subscriber Ratio":sub_score}}
+
 
 def get_growth_metrics(df):
     df_s = df.sort_values("published_at").copy()

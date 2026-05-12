@@ -74,6 +74,7 @@ with st.sidebar:
         "Prediction Model",
         "Best Time to Post",
         "Revenue Estimation",
+        "Scatter Plot",
     ], label_visibility="collapsed")
 
     st.markdown("""<div style="padding:10px 20px 4px;border-top:1px solid #1c1c1c;margin-top:4px;font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:2px;">Search</div>""", unsafe_allow_html=True)
@@ -148,3 +149,5 @@ elif page == "Best Time to Post":
     from views.p6_timing import render; render(df, cs)
 elif page == "Revenue Estimation":
     from views.p7_revenue import render; render(df, cs, rpm_val)
+elif page == "Scatter Plot":
+    from views.p8_scatter import render; render(df, cs)

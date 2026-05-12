@@ -1,5 +1,6 @@
 import os
 import re
+import httplib2
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 
@@ -10,7 +11,9 @@ if not YOUTUBE_API_KEY:
     import streamlit as st
     YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 
-youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY)
+# Custom http object — disables SSL verification to fix proxy/antivirus SSL interception
+_http = httplib2.Http(disable_ssl_certificate_validation=True)
+youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY, http=_http)
 
 def get_channel_id(query):
     #If user enters the channel ID return it directly
